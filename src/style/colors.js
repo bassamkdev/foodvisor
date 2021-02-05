@@ -1,0 +1,5 @@
+export const xlightGray = '##e9ecef'
+export const lightGray = '#dee2e6'
+export const gray = '#ced4da'
+export const darkGray = '#adb5bd'
+export const xDarkGray = '#6c757d'
