@@ -1,7 +1,7 @@
-export const family = {
-  body: 'Oswald_400Regular',
-  heading: 'Lato_400Regular',
-  monospace: 'Oswald_400Regular',
+export const fonts = {
+  body: 'Lato_400Regular',
+  heading: 'MavenPro_400Regular',
+  monospace: 'Lato_400Regular',
 }
 
 export const fontWeights = {
