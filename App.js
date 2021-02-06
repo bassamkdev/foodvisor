@@ -1,23 +1,24 @@
 import * as React from 'react'
-import {StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native'
+import {StatusBar} from 'react-native'
 import {StatusBar as ExpoStatusBar} from 'expo-status-bar'
-import {RestaurantScreen} from './src/screens/restaurants'
+import {RestaurantsScreen} from './src/screens/restaurants'
+import styled from '@emotion/native'
+import {ThemeProvider} from '@emotion/react'
+import {theme} from './src/style'
 
 export default function App() {
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <RestaurantScreen />
-      </SafeAreaView>
+    <ThemeProvider theme={theme}>
+      <AppContainer>
+        <RestaurantsScreen />
+      </AppContainer>
       <ExpoStatusBar style="auto" />
-    </>
+    </ThemeProvider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'stretch',
-    marginTop: StatusBar.currentHeight,
-  },
+const AppContainer = styled.SafeAreaView({
+  flex: 1,
+  alignItems: 'stretch',
+  marginTop: StatusBar.currentHeight,
 })

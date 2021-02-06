@@ -1,27 +1,16 @@
-import * as React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import styled from '@emotion/native'
 
-import * as colors from '../style/colors'
-
-function Tag({title}) {
-  return (
-    <View style={styles.tagContainer}>
-      <Text>{title}</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  tagContainer: {
-    backgroundColor: colors.gray,
+const Tag = styled.View(
+  {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 2,
-    minWidth: 30,
   },
-  tagTitle: {
-    color: colors.xDarkGray,
-  },
-})
+  ({theme}) => ({
+    backgroundColor: theme.colors.ui.quaternary,
+    color: theme.colors.text.primary,
+    padding: theme.spaces[1],
+    minWidth: theme.sizes[2],
+  }),
+)
 
 export {Tag}

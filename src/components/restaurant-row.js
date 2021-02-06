@@ -1,6 +1,8 @@
 import * as React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import {Card, Title, Paragraph} from 'react-native-paper'
+import {Text} from 'react-native'
+import {Card, Paragraph} from 'react-native-paper'
+import styled from '@emotion/native'
+
 import {Tag} from '../components/lib'
 
 function RestaurantRow({restaurant = {}}) {
@@ -17,36 +19,45 @@ function RestaurantRow({restaurant = {}}) {
   } = restaurant
 
   return (
-    <Card style={styles.container}>
-      <Card.Cover style={styles.cover} source={{uri: photos[0]}} />
+    <CardContainer>
+      <CardImage source={{uri: photos[0]}} />
       <Card.Title title={name} />
       <Card.Content>
         <Paragraph>{address}</Paragraph>
-        <View style={styles.tagsLine}>
-          <Tag title={rating} />
-        </View>
+        <CardTagsContainer>
+          <Tag>
+            <Text>{rating}</Text>
+          </Tag>
+        </CardTagsContainer>
       </Card.Content>
-    </Card>
+    </CardContainer>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
+const CardContainer = styled(Card)(
+  {
     borderBottomWidth: 0.1,
-    borderBottomColor: 'lightgray',
-    borderRadius: 0,
-    padding: 10,
-    paddingBottom: 0,
-  },
-  cover: {
-    backgroundColor: 'white',
     borderRadius: 0,
   },
-  title: {},
-  content: {},
-  tagsLine: {
-    flexDirection: 'row',
+  ({theme}) => ({
+    borderBottomColor: theme.colors.ui.quaternary,
+    padding: theme.spaces[2],
+    paddingBottom: theme.spaces[0],
+    backgroundColor: theme.colors.bg.secondary,
+  }),
+)
+
+const CardImage = styled(Card.Cover)(
+  {
+    borderRadius: 0,
   },
+  ({theme}) => ({
+    backgroundColor: theme.colors.bg.secondary,
+  }),
+)
+
+const CardTagsContainer = styled.View({
+  flexDirection: 'row',
 })
 
 export {RestaurantRow}

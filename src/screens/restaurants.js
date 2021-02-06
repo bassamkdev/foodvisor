@@ -1,40 +1,49 @@
 import * as React from 'react'
+import {css} from '@emotion/native'
 import {StyleSheet, Text, View} from 'react-native'
 import {Searchbar} from 'react-native-paper'
 import {RestaurantRow} from '../components/restaurant-row'
+import styled from '@emotion/native'
 
-function RestaurantScreen() {
+const SearchBarContainer = styled.View(
+  {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ({theme}) => ({
+    padding: theme.spaces[3],
+  }),
+)
+
+const RestaurantsList = styled.View(
+  {
+    flex: 1,
+  },
+  ({theme}) => ({
+    paddingTop: theme.spaces[3],
+    paddingBottom: theme.spaces[2],
+  }),
+)
+
+function RestaurantsScreen() {
   const [searchQuery, setSearchQuery] = React.useState('')
   function handleChangeText(query) {
     setSearchQuery(query)
   }
   return (
     <>
-      <View style={styles.search}>
+      <SearchBarContainer>
         <Searchbar
           placeholder="Search"
           onChangeText={handleChangeText}
           value={searchQuery}
         />
-      </View>
-      <View style={styles.list}>
+      </SearchBarContainer>
+      <RestaurantsList>
         <RestaurantRow />
-      </View>
+      </RestaurantsList>
     </>
   )
 }
 
-const styles = StyleSheet.create({
-  search: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-  list: {
-    flex: 1,
-    paddingTop: 20,
-    paddingBottom: 10,
-  },
-})
-
-export {RestaurantScreen}
+export {RestaurantsScreen}
