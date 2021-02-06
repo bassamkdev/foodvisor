@@ -1,14 +1,17 @@
 import * as React from 'react'
-import {Text} from 'react-native'
+import {Image} from 'react-native'
 import {Card, Paragraph} from 'react-native-paper'
-import styled from '@emotion/native'
+import styled, {css} from '@emotion/native'
+import {SvgXml} from 'react-native-svg'
 
-import {Tag} from '../components/lib'
+import {Tag, TagText} from '../components/lib'
+import star from '../../assets/star.js'
+import openNow from '../../assets/open-now.js'
 
 function RestaurantRow({restaurant = {}, ...props}) {
   const {
     name = 'My Restaurant',
-    icon,
+    icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos = [
       'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
     ],
@@ -20,14 +23,36 @@ function RestaurantRow({restaurant = {}, ...props}) {
 
   return (
     <CardContainer>
-      <CardImage source={{uri: photos[0]}} />
+      <CardImage key={name} source={{uri: photos[0]}} />
       <CardTitle>{name}</CardTitle>
       <Card.Content>
         <ContentText>{address}</ContentText>
         <CardTagsContainer>
           <Tag>
-            <ContentText>{rating}</ContentText>
+            <TagText>{rating.toPrecision(2)}</TagText>
+            <SvgXml xml={star} width={16} height={16} />
           </Tag>
+          {icon ? (
+            <Tag>
+              <Image
+                source={{uri: icon}}
+                style={css`
+                  width: 16px;
+                  height: 16px;
+                `}
+              />
+            </Tag>
+          ) : null}
+          {isOpenNow ? (
+            <Tag>
+              <SvgXml xml={openNow} width={16} height={16} />
+            </Tag>
+          ) : null}
+          {isClosedTemporarily ? (
+            <Tag>
+              <TagText color="red">TEMPORARILY CLOSED</TagText>
+            </Tag>
+          ) : null}
         </CardTagsContainer>
       </Card.Content>
     </CardContainer>
@@ -61,11 +86,12 @@ const CardTitle = styled.Text(({theme}) => ({
   fontSize: theme.fontSizes.title,
   paddingLeft: theme.spaces[3],
   paddingTop: theme.spaces[3],
-  paddingBottom: theme.spaces[2],
+  paddingBottom: theme.spaces[1],
 }))
 
 const ContentText = styled(Paragraph)(({theme}) => ({
   fontFamily: theme.fonts.body,
+  paddingBottom: 10,
 }))
 
 const CardTagsContainer = styled.View({

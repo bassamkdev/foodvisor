@@ -19,6 +19,7 @@ export const colors = {
     error: '#D0421b',
     success: '#138000',
     whtie: 'white',
+    xLightGray: '#e9ecef',
   },
   bg: {
     primary: '#f8f9fa',
