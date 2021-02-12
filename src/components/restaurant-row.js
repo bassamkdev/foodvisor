@@ -67,6 +67,7 @@ const CardContainer = styled(Card)(
   ({theme}) => ({
     borderBottomColor: theme.colors.ui.quaternary,
     padding: theme.spaces[2],
+    marginBottom: theme.spaces[1],
     paddingBottom: theme.spaces[0],
     backgroundColor: theme.colors.bg.secondary,
   }),

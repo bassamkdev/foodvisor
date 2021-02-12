@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {css} from '@emotion/native'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, View, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
 import {RestaurantRow} from '../components/restaurant-row'
 import styled from '@emotion/native'
@@ -39,9 +39,21 @@ function RestaurantsScreen() {
           value={searchQuery}
         />
       </SearchBarContainer>
-      <RestaurantsList>
-        <RestaurantRow />
-      </RestaurantsList>
+      <FlatList
+        data={[
+          {name: '1'},
+          {name: '2'},
+          {name: '3'},
+          {name: '4'},
+          {name: '5'},
+          {name: '6'},
+          {name: '7'},
+          {name: '8'},
+          {name: '9'},
+        ]}
+        keyExtractor={item => item.name}
+        renderItem={RestaurantRow}
+      />
     </>
   )
 }
