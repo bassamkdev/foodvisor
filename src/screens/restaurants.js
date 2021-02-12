@@ -1,6 +1,5 @@
 import * as React from 'react'
-import {css} from '@emotion/native'
-import {StyleSheet, Text, View, FlatList} from 'react-native'
+import {StatusBar, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
 import {RestaurantRow} from '../components/restaurant-row'
 import styled from '@emotion/native'
@@ -15,15 +14,11 @@ const SearchBarContainer = styled.View(
   }),
 )
 
-const RestaurantsList = styled.View(
-  {
-    flex: 1,
-  },
-  ({theme}) => ({
-    paddingTop: theme.spaces[3],
-    paddingBottom: theme.spaces[2],
-  }),
-)
+const AppContainer = styled.SafeAreaView({
+  flex: 1,
+  alignItems: 'stretch',
+  marginTop: StatusBar.currentHeight,
+})
 
 function RestaurantsScreen() {
   const [searchQuery, setSearchQuery] = React.useState('')
@@ -31,7 +26,7 @@ function RestaurantsScreen() {
     setSearchQuery(query)
   }
   return (
-    <>
+    <AppContainer>
       <SearchBarContainer>
         <Searchbar
           placeholder="Search"
@@ -54,7 +49,7 @@ function RestaurantsScreen() {
         keyExtractor={item => item.name}
         renderItem={RestaurantRow}
       />
-    </>
+    </AppContainer>
   )
 }
 
