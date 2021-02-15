@@ -1,4 +1,5 @@
 import styled from '@emotion/native'
+import {StatusBar} from 'react-native'
 
 const Tag = styled.View(
   {
@@ -23,4 +24,9 @@ const TagText = styled.Text(({theme, color}) => ({
   marginRight: theme.spaces[1],
 }))
 
-export {Tag, TagText}
+const SafeArea = styled.SafeAreaView({
+  flex: 1,
+  alignItems: 'stretch',
+  marginTop: StatusBar.currentHeight,
+})
+export {Tag, TagText, SafeArea}

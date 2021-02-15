@@ -1,8 +1,9 @@
 import * as React from 'react'
-import {StatusBar, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
-import {RestaurantRow} from '../components/restaurant-row'
 import styled from '@emotion/native'
+
+import {RestaurantsList} from '../components/restaurants-list'
+import {SafeArea} from '../components/lib'
 
 const SearchBarContainer = styled.View(
   {
@@ -14,42 +15,29 @@ const SearchBarContainer = styled.View(
   }),
 )
 
-const AppContainer = styled.SafeAreaView({
-  flex: 1,
-  alignItems: 'stretch',
-  marginTop: StatusBar.currentHeight,
-})
-
-function RestaurantsScreen() {
+function RestaurantsScreen({navigation}) {
   const [searchQuery, setSearchQuery] = React.useState('')
-  function handleChangeText(query) {
+  const [keyword, setKeyword] = React.useState()
+
+  function handleInputChange(query) {
     setSearchQuery(query)
   }
+  function handleSubmit() {
+    setKeyword(searchQuery.toLowerCase())
+  }
+
   return (
-    <AppContainer>
+    <SafeArea>
       <SearchBarContainer>
         <Searchbar
-          placeholder="Search"
-          onChangeText={handleChangeText}
           value={searchQuery}
+          onChangeText={handleInputChange}
+          placeholder="Search"
+          onSubmitEditing={handleSubmit}
         />
       </SearchBarContainer>
-      <FlatList
-        data={[
-          {name: '1'},
-          {name: '2'},
-          {name: '3'},
-          {name: '4'},
-          {name: '5'},
-          {name: '6'},
-          {name: '7'},
-          {name: '8'},
-          {name: '9'},
-        ]}
-        keyExtractor={item => item.name}
-        renderItem={RestaurantRow}
-      />
-    </AppContainer>
+      <RestaurantsList keyword={keyword} navigation={navigation} />
+    </SafeArea>
   )
 }
 
