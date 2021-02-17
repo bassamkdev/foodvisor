@@ -1,15 +1,20 @@
 import {mocks, mockImages} from './data'
 import camelize from 'camelize'
 
-function restaurantRequest(location = '37.7749295,-122.4194155') {
+function restaurantRequest(location) {
+  let locationString
+  if (!location.lat) {
+    locationString = '51.219448,4.402464'
+  } else {
+    locationString = `${location.lat},${location.lng}`
+  }
   return new Promise((resolve, reject) => {
-    const mockData = mocks[location]
+    const mockData = mocks[locationString]
     if (!mockData) {
       throw new Error('not found')
     }
-    setTimeout(() => {
-      resolve(mockData)
-    }, 2000)
+
+    resolve(mockData)
   })
 }
 

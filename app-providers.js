@@ -11,6 +11,8 @@ import {
 } from '@expo-google-fonts/lato'
 
 import {theme} from './src/style'
+import {SearchProvider} from './src/context/search.context'
+import {FavouritesProvider} from './src/context/favourites.context'
 
 const queryCilent = new QueryClient()
 
@@ -22,7 +24,11 @@ function AppProvider({children}) {
   }
   return (
     <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryCilent}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryCilent}>
+        <SearchProvider>
+          <FavouritesProvider>{children}</FavouritesProvider>
+        </SearchProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   )
 }

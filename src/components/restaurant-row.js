@@ -7,7 +7,7 @@ import {SvgXml} from 'react-native-svg'
 import {Tag, TagText} from '../components/lib'
 import star from '../../assets/star.js'
 import openNow from '../../assets/open-now.js'
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import {Favourite} from './favourite'
 
 function RestaurantRow({restaurant = {}}) {
   const {
@@ -22,6 +22,7 @@ function RestaurantRow({restaurant = {}}) {
 
   return (
     <CardContainer>
+      <Favourite restaurant={restaurant} />
       <CardImage key={name} source={{uri: photos[0]}} />
       <CardTitle>{name}</CardTitle>
       <Card.Content>

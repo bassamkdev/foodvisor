@@ -1,9 +1,11 @@
 import * as React from 'react'
-import {Searchbar} from 'react-native-paper'
-import styled from '@emotion/native'
 
 import {RestaurantsList} from '../components/restaurants-list'
 import {SafeArea} from '../components/lib'
+import {useSearch} from '../context/search.context'
+import {Searchbar} from 'react-native-paper'
+import styled from '@emotion/native'
+import {FavouritesBar} from '../components/favourites-bar'
 
 const SearchBarContainer = styled.View(
   {
@@ -16,27 +18,25 @@ const SearchBarContainer = styled.View(
 )
 
 function RestaurantsScreen({navigation}) {
-  const [searchQuery, setSearchQuery] = React.useState('')
-  const [keyword, setKeyword] = React.useState()
-
-  function handleInputChange(query) {
-    setSearchQuery(query)
-  }
-  function handleSubmit() {
-    setKeyword(searchQuery.toLowerCase())
-  }
-
+  const {handleSubmit} = useSearch()
+  const [isFavouritesOpen, setIsFavouritesOpen] = React.useState(false)
   return (
     <SafeArea>
       <SearchBarContainer>
         <Searchbar
-          value={searchQuery}
-          onChangeText={handleInputChange}
+          icon={isFavouritesOpen ? 'heart' : 'heart-outline'}
           placeholder="Search"
-          onSubmitEditing={handleSubmit}
+          onSubmitEditing={({nativeEvent: {text}}) => {
+            handleSubmit(text)
+          }}
+          onIconPress={() => setIsFavouritesOpen(!isFavouritesOpen)}
         />
       </SearchBarContainer>
-      <RestaurantsList keyword={keyword} navigation={navigation} />
+      {isFavouritesOpen ? (
+        <FavouritesBar navigate={navigation.navigate} />
+      ) : null}
+
+      <RestaurantsList navigate={navigation.navigate} />
     </SafeArea>
   )
 }

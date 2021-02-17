@@ -5,26 +5,23 @@ import {colors} from '../style/colors'
 
 import {useRestaurants} from '../mocks/restaurants/restaurant.context'
 import {useLocation} from '../mocks/geolocation/location.context'
+import {useSearch} from '../context/search.context'
 import {RestaurantRow} from './restaurant-row'
 
-function RestaurantsList({keyword, navigation}) {
-  const {
-    data: location,
-    isLoadind: isLocationLoading,
-    isError: isLocationError,
-  } = useLocation(keyword)
-  const locationString = location
-    ? `${location.lat},${location.lng}`
-    : '37.7749295,-122.4194155'
-  const {
-    data: restaurants,
-    isLoading: isRestaurantsLoading,
-    isError: isRestaurantsError,
-  } = useRestaurants(locationString)
+function RestaurantsList({navigate}) {
+  const {keyword} = useSearch()
+  const {data: location} = useLocation(keyword)
+  const lat = location?.lat
+  const lng = location?.lng
 
-  if (isRestaurantsLoading || isLocationLoading) {
+  const {data: restaurants, isLoading, isError} = useRestaurants(
+    {lat, lng},
+    {enabled: !!lat},
+  )
+
+  if (isLoading) {
     return <ActivityIndicator animating={true} color={colors.brand.primary} />
-  } else if (isLocationError || isRestaurantsError) {
+  } else if (isError) {
     return <Text>hmm, nothing found in this area</Text>
   }
   return (
@@ -33,9 +30,7 @@ function RestaurantsList({keyword, navigation}) {
       keyExtractor={item => item.name}
       renderItem={({item}) => (
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('restaurantInfo', {restaurant: item})
-          }
+          onPress={() => navigate('restaurantInfo', {restaurant: item})}
         >
           <RestaurantRow restaurant={item} />
         </TouchableOpacity>
