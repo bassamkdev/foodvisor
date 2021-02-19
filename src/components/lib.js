@@ -24,9 +24,14 @@ const TagText = styled.Text(({theme, color}) => ({
   marginRight: theme.spaces[1],
 }))
 
-const SafeArea = styled.SafeAreaView({
-  flex: 1,
-  alignItems: 'stretch',
-  marginTop: StatusBar.currentHeight,
-})
+const SafeArea = styled.SafeAreaView(
+  {
+    flex: 1,
+    alignItems: 'stretch',
+    marginTop: StatusBar.currentHeight,
+  },
+  ({theme}) => ({
+    backgroundColor: 'white',
+  }),
+)
 export {Tag, TagText, SafeArea}

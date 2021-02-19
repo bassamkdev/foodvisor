@@ -1,10 +1,12 @@
 import * as React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {RestaurantsScreen} from '../../screens/restaurants'
 import {RestaurantsStackScreen} from './restaurants-navigation'
+import {SettingsNavigator} from './settings.navigation'
 import {MapScreen} from '../../screens/map.screen'
 import Ionicons from '@expo/vector-icons/Ionicons'
+
+import {SearchProvider} from '../../context/search.context'
+import {FavouritesProvider} from '../../context/favourites.context'
 
 const Tab = createBottomTabNavigator()
 
@@ -26,19 +28,22 @@ function setScreenOptions({route}) {
 
 function AppNavigation() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={setScreenOptions}
-        tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <Tab.Screen name="Restaurants" component={RestaurantsStackScreen} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Settings" component={RestaurantsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SearchProvider>
+      <FavouritesProvider>
+        <Tab.Navigator
+          initialRouteName="Restaurants"
+          screenOptions={setScreenOptions}
+          tabBarOptions={{
+            activeTintColor: '#57cc99',
+            inactiveTintColor: 'gray',
+          }}
+        >
+          <Tab.Screen name="Restaurants" component={RestaurantsStackScreen} />
+          <Tab.Screen name="Map" component={MapScreen} />
+          <Tab.Screen name="Settings" component={SettingsNavigator} />
+        </Tab.Navigator>
+      </FavouritesProvider>
+    </SearchProvider>
   )
 }
 

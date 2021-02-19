@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {QueryClient, QueryClientProvider} from 'react-query'
+import {QueryClient, QueryClientProvider, QueryCache} from 'react-query'
 import {ThemeProvider} from '@emotion/react'
 import {
   useFonts as useMavenFonts,
@@ -11,10 +11,10 @@ import {
 } from '@expo-google-fonts/lato'
 
 import {theme} from './src/style'
-import {SearchProvider} from './src/context/search.context'
-import {FavouritesProvider} from './src/context/favourites.context'
+import {AuthProvider} from './src/context/auth.context'
 
-const queryCilent = new QueryClient()
+const queryCache = new QueryCache()
+const queryClient = new QueryClient({queryCache})
 
 function AppProvider({children}) {
   const [mavenFontsLoaded] = useMavenFonts({MavenPro_400Regular})
@@ -23,13 +23,11 @@ function AppProvider({children}) {
     return null
   }
   return (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryCilent}>
-        <SearchProvider>
-          <FavouritesProvider>{children}</FavouritesProvider>
-        </SearchProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>{children}</AuthProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 
