@@ -3,7 +3,6 @@ import {List} from 'react-native-paper'
 
 import {RestaurantRow} from '../components/restaurant-row'
 import {SafeArea} from '../components/lib'
-import {Ionicons} from '@expo/vector-icons'
 import {ScrollView} from 'react-native-gesture-handler'
 
 function RestaurantInfoScreen({route}) {
