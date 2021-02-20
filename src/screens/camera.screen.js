@@ -1,12 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/native'
-import {
-  ActivityIndicator,
-  Button,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native'
+import {ActivityIndicator, Button, Text, TouchableOpacity} from 'react-native'
 import {Camera} from 'expo-camera'
 import {Feather} from '@expo/vector-icons'
 import {MaterialIcons} from '@expo/vector-icons'
@@ -38,6 +32,11 @@ const CameraScreenContainer = styled.View({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
+})
+
+const CameraSafeArea = styled.SafeAreaView({
+  flex: 1,
+  backgroundColor: 'black',
 })
 
 function CameraScreen({navigation}) {
@@ -96,7 +95,7 @@ function CameraScreen({navigation}) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+    <CameraSafeArea>
       <CameraView
         ref={cameraRef}
         type={cameraType}
@@ -111,7 +110,7 @@ function CameraScreen({navigation}) {
           </TouchableOpacity>
         </CameraActions>
       </CameraView>
-    </SafeAreaView>
+    </CameraSafeArea>
   )
 }
 

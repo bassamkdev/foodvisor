@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/native'
 import {SafeArea} from '../components/lib'
-import {Button, Image} from 'react-native'
+import {Button} from 'react-native'
 import {useAuth} from '../context/auth.context'
 import {storeData} from '../utils/localStorage'
 

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useAuth} from './auth.context'
 import {getData, storeData} from '../utils/localStorage'
 

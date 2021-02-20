@@ -1,5 +1,7 @@
+import * as React from 'react'
 import styled from '@emotion/native'
-import {StatusBar} from 'react-native'
+import {StatusBar, Button} from 'react-native'
+import {ActivityIndicator} from 'react-native-paper'
 
 const Tag = styled.View(
   {
@@ -34,4 +36,37 @@ const SafeArea = styled.SafeAreaView(
     backgroundColor: 'white',
   }),
 )
-export {Tag, TagText, SafeArea}
+
+const FullPageView = styled.View({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+
+const ErrorText = styled.Text({
+  color: 'red',
+})
+
+function FullPageSpinner() {
+  return (
+    <FullPageView>
+      <ActivityIndicator />
+    </FullPageView>
+  )
+}
+
+function FullPageError({error, action}) {
+  return (
+    <FullPageView>
+      <ErrorText>{error}</ErrorText>
+      <Button
+        title="Retry"
+        onPress={() => {
+          action()
+        }}
+      />
+    </FullPageView>
+  )
+}
+
+export {Tag, TagText, SafeArea, FullPageSpinner, FullPageError}

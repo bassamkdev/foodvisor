@@ -1,9 +1,9 @@
 import * as firebase from 'firebase'
 import * as React from 'react'
-import {View, Text, Button} from 'react-native'
-import {ActivityIndicator} from 'react-native-paper'
+
 import {useAsync} from '../utils/hooks'
 import {useQueryClient} from 'react-query'
+import {FullPageError, FullPageSpinner} from '../components/lib'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCCSUBCb2tDhtOvstJpJwH1yVRXgMns190',
@@ -80,25 +80,11 @@ function AuthProvider(props) {
   )
 
   if (isLoading || isIdle) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator />
-      </View>
-    )
+    return <FullPageSpinner />
   }
 
   if (isError) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: 'red'}}>{error}</Text>
-        <Button
-          title="Retry"
-          onPress={() => {
-            reset()
-          }}
-        />
-      </View>
-    )
+    return <FullPageError error={error} action={reset} />
   }
 
   if (isSuccess) {
