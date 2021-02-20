@@ -2,9 +2,9 @@ import * as React from 'react'
 import styled from '@emotion/native'
 import {useAuth} from '../context/auth.context'
 import {List, Avatar} from 'react-native-paper'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useFocusEffect} from '@react-navigation/native'
 import {SafeArea} from '../components/lib'
+import {getData} from '../utils/localStorage'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 
 const AvatarContainer = styled.View({
@@ -28,19 +28,8 @@ function SettingsScreen({navigation}) {
   const {signOut, user} = useAuth()
   const [imageUri, setImageUri] = React.useState(null)
 
-  async function getData(userId) {
-    try {
-      const jsonValue = await AsyncStorage.getItem(`@profileImage-${userId}`)
-      if (jsonValue !== null) {
-        setImageUri(prev => JSON.parse(jsonValue))
-      }
-    } catch (e) {
-      console.log('reading data', e)
-    }
-  }
-
   useFocusEffect(() => {
-    getData(user?.uid)
+    getData('profileImage', user?.uid, setImageUri)
   })
 
   return (

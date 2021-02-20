@@ -1,32 +1,13 @@
 import * as React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useAuth} from './auth.context'
+import {getData, storeData} from '../utils/localStorage'
 
 const FavouritesContext = React.createContext()
 
 function FavouritesProvider(props) {
   const {user} = useAuth()
   const [favourites, setFavourites] = React.useState({})
-
-  async function storeData(value, userId) {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem(`@favourites-${userId}`, jsonValue)
-    } catch (e) {
-      console.log('storing data', e)
-    }
-  }
-
-  async function getData(userId) {
-    try {
-      const jsonValue = await AsyncStorage.getItem(`@favourites-${userId}`)
-      if (jsonValue !== null) {
-        setFavourites(JSON.parse(jsonValue))
-      }
-    } catch (e) {
-      console.log('reading data', e)
-    }
-  }
 
   const add = React.useCallback(
     function (restaurant) {
@@ -46,11 +27,11 @@ function FavouritesProvider(props) {
   )
 
   React.useEffect(() => {
-    getData(user?.uid)
+    getData('favourites', user?.uid, setFavourites)
   }, [user?.uid])
 
   React.useEffect(() => {
-    storeData(favourites, user?.uid)
+    storeData('favourites', favourites, user?.uid)
   }, [favourites, user?.uid])
 
   const value = {
