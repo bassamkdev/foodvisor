@@ -10,13 +10,17 @@ import {RestaurantRow} from './restaurant-row'
 
 function RestaurantsList({navigate}) {
   const {keyword} = useSearch()
-  const {data: location} = useLocation(keyword)
-  const lat = location?.lat
-  const lng = location?.lng
+  const location = useLocation(keyword)
+  const locationStrign = `${location.lat},${location.lng}`
 
   const {data: restaurants, isLoading, isError} = useRestaurants(
-    {lat, lng},
-    {enabled: !!lat},
+    locationStrign,
+    {enabled: !!locationStrign},
+  )
+
+  const handlePress = React.useCallback(
+    item => navigate('restaurantInfo', {restaurant: item}),
+    [navigate],
   )
 
   if (isLoading) {
@@ -29,9 +33,7 @@ function RestaurantsList({navigate}) {
       data={restaurants}
       keyExtractor={item => item.name}
       renderItem={({item}) => (
-        <TouchableOpacity
-          onPress={() => navigate('restaurantInfo', {restaurant: item})}
-        >
+        <TouchableOpacity onPress={() => handlePress(item)}>
           <RestaurantRow restaurant={item} />
         </TouchableOpacity>
       )}

@@ -1,7 +1,6 @@
-import {restaurantRequest, restaurantTransform} from './restaurant.service'
+import {restaurantTransform} from './restaurant.service'
 import {useQuery} from 'react-query'
-import {Platform} from 'react-native'
-
+import {host} from '../../utils/host'
 // const restaurantsQueryConfig = {
 //   staleTime: 1000 * 60 * 60,
 //   cacheTime: 1000 * 60 * 60,
@@ -10,8 +9,11 @@ import {Platform} from 'react-native'
 function useRestaurants(query, options = {}) {
   const result = useQuery({
     queryKey: ['restaurants', {query}],
-    queryFn: () => restaurantRequest(query).then(restaurantTransform),
-    staleTime: Platform.OS === 'ios' ? 1000 * 60 * 60 : 1000,
+    queryFn: () =>
+      fetch(`${host}restaurants?location=${query}`)
+        .then(res => res.json())
+        .then(restaurantTransform),
+    // staleTime: Platform.OS === 'ios' ? 1000 * 60 * 60 : 1000,
     ...options,
   })
   return result

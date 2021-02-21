@@ -8,10 +8,12 @@ import {useRestaurants} from '../mocks/restaurants/restaurant.context'
 import {Favourite} from '../components/favourite'
 function MapScreen({navigation}) {
   const {keyword} = useSearch()
-  const {data: location} = useLocation(keyword)
-  const lat = location?.lat
-  const lng = location?.lng
-  const {data: restaurants} = useRestaurants({lat, lng}, {enabled: !!lat})
+  const location = useLocation(keyword)
+  const locationStrign = `${location.lat},${location.lng}`
+
+  const {data: restaurants} = useRestaurants(locationStrign, {
+    enabled: !!locationStrign,
+  })
 
   const northeastLat = location ? location.viewport.northeast.lat : null
   const southwestLat = location ? location.viewport.southwest.lat : null
@@ -23,8 +25,8 @@ function MapScreen({navigation}) {
       <MapView
         style={{height: '100%'}}
         region={{
-          latitude: lat || 0,
-          longitude: lng || 0,
+          latitude: location.lat || 0,
+          longitude: location.lng || 0,
           latitudeDelta: latDelta,
           longitudeDelta: 0.02,
         }}

@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/native'
 import {useFavourites} from '../context/favourites.context'
 import {SafeArea} from '../components/lib'
-import {ScrollView, TouchableOpacity} from 'react-native'
+import {TouchableOpacity} from 'react-native'
 import {RestaurantRow} from '../components/restaurant-row'
 
 const FavouritesWrapper = styled.ScrollView({
