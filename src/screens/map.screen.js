@@ -3,8 +3,8 @@ import MapView from 'react-native-maps'
 import {Callout} from '../components/map-callout'
 import {SearchBar} from '../components/search'
 import {useSearch} from '../context/search.context'
-import {useLocation} from '../mocks/geolocation/location.context'
-import {useRestaurants} from '../mocks/restaurants/restaurant.context'
+import {useLocation} from '../services/geolocation/location.context'
+import {useRestaurants} from '../services/restaurants/restaurant.context'
 import {Favourite} from '../components/favourite'
 function MapScreen({navigation}) {
   const {keyword} = useSearch()

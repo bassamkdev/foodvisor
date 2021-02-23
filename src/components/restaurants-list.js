@@ -3,10 +3,11 @@ import {FlatList, TouchableOpacity} from 'react-native'
 import {ActivityIndicator, Text} from 'react-native-paper'
 import {colors} from '../style/colors'
 
-import {useRestaurants} from '../mocks/restaurants/restaurant.context'
-import {useLocation} from '../mocks/geolocation/location.context'
+import {useRestaurants} from '../services/restaurants/restaurant.context'
+import {useLocation} from '../services/geolocation/location.context'
 import {useSearch} from '../context/search.context'
 import {RestaurantRow} from './restaurant-row'
+import {FadeInView} from './animation'
 
 function RestaurantsList({navigate}) {
   const {keyword} = useSearch()
@@ -17,9 +18,17 @@ function RestaurantsList({navigate}) {
     locationStrign,
     {enabled: !!locationStrign},
   )
-
-  const handlePress = React.useCallback(
-    item => navigate('restaurantInfo', {restaurant: item}),
+  const renderItem = React.useCallback(
+    function renderItem({item}) {
+      const handlePress = () => navigate('restaurantInfo', {restaurant: item})
+      return (
+        <FadeInView duration={500}>
+          <TouchableOpacity onPress={handlePress}>
+            <RestaurantRow restaurant={item} />
+          </TouchableOpacity>
+        </FadeInView>
+      )
+    },
     [navigate],
   )
 
@@ -28,15 +37,13 @@ function RestaurantsList({navigate}) {
   } else if (isError) {
     return <Text>hmm, nothing found in this area</Text>
   }
+
   return (
     <FlatList
       data={restaurants}
-      keyExtractor={item => item.name}
-      renderItem={({item}) => (
-        <TouchableOpacity onPress={() => handlePress(item)}>
-          <RestaurantRow restaurant={item} />
-        </TouchableOpacity>
-      )}
+      keyExtractor={item => item.placeId}
+      renderItem={renderItem}
+      initialNumToRender={10}
     />
   )
 }

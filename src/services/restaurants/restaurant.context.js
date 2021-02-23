@@ -11,7 +11,9 @@ function useRestaurants(query, options = {}) {
     queryKey: ['restaurants', {query}],
     queryFn: () =>
       fetch(`${host}restaurants?location=${query}`)
-        .then(res => res.json())
+        .then(res => {
+          return res.json()
+        })
         .then(restaurantTransform),
     // staleTime: Platform.OS === 'ios' ? 1000 * 60 * 60 : 1000,
     ...options,

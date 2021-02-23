@@ -23,7 +23,11 @@ function RestaurantRow({restaurant = {}}) {
   return (
     <CardContainer>
       <Favourite restaurant={restaurant} />
-      <CardImage key={name} source={{uri: photos[0]}} />
+      <CardImage
+        key={name}
+        source={{uri: photos[0], cache: 'force-cache'}}
+        defaultSource={require('../../assets/adaptive-icon.png')}
+      />
       <CardTitle>{name}</CardTitle>
       <Card.Content>
         <ContentText>{address}</ContentText>

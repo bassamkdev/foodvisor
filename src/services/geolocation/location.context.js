@@ -9,9 +9,7 @@ const getLocationConfig = query => {
     queryFn: () =>
       fetch(`${host}geocode?city=${query}`)
         .then(res => res.json())
-        .then(data => {
-          return locationTransform(data)
-        }),
+        .then(locationTransform),
 
     // staleTime: Platform.OS === 'ios' ? 1000 * 60 * 60 : 1000,
   }
