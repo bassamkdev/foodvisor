@@ -2,7 +2,7 @@ import * as React from 'react'
 import {LiteCreditCardInput} from 'react-native-credit-card-input'
 import {cardTokenRequest} from '../services/stripe.service'
 
-function CreditCardInput({name = 'bassam'}) {
+function CreditCardInput({name}) {
   function handleInfoChange(form) {
     const {values, status} = form
     const isIncomplete = Object.values(status).includes('incomplete')
@@ -14,7 +14,9 @@ function CreditCardInput({name = 'bassam'}) {
       exp_year: exp[1],
       cvc: values.cvc,
     }
-    cardTokenRequest(card).then(info => console.log(info))
+    if (!isIncomplete) {
+      cardTokenRequest(card).then(info => console.log(info))
+    }
   }
   return <LiteCreditCardInput onChange={handleInfoChange} />
 }

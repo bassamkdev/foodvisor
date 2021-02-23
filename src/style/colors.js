@@ -16,7 +16,7 @@ export const colors = {
     tertiary: '#adb5bd',
     quaternary: '#ced4da',
     disabled: '#dee2e6',
-    error: '#D0421b',
+    error: '#d20f46',
     success: '#138000',
     whtie: 'white',
     xLightGray: '#e9ecef',
@@ -30,7 +30,7 @@ export const colors = {
     secondary: '#6c757d',
     disabled: '#ced4da',
     inverse: '#e9ecef',
-    error: '#d0421a',
+    error: '#d20f46',
     success: '#138000',
   },
 }

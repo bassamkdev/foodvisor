@@ -9,7 +9,7 @@ import star from '../../assets/star.js'
 import openNow from '../../assets/open-now.js'
 import {Favourite} from './favourite'
 
-function RestaurantRow({restaurant = {}}) {
+function RestaurantRow({restaurant = {}, ...props}) {
   const {
     name,
     icon,
@@ -21,7 +21,7 @@ function RestaurantRow({restaurant = {}}) {
   } = restaurant
 
   return (
-    <CardContainer>
+    <CardContainer {...props}>
       <Favourite restaurant={restaurant} />
       <CardImage
         key={name}

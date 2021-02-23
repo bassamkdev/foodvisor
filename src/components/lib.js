@@ -69,4 +69,4 @@ function FullPageError({error, action}) {
   )
 }
 
-export {Tag, TagText, SafeArea, FullPageSpinner, FullPageError}
+export {Tag, TagText, SafeArea, FullPageSpinner, FullPageError, FullPageView}

@@ -1,12 +1,39 @@
 import * as React from 'react'
 import {List} from 'react-native-paper'
+import styled from '@emotion/native'
 
 import {RestaurantRow} from '../components/restaurant-row'
 import {SafeArea} from '../components/lib'
 import {ScrollView} from 'react-native-gesture-handler'
+import {Button} from 'react-native-paper'
+import {useCart} from '../context/cart.context'
+
+Button.defaultProps = {
+  contentStyle: {
+    width: 'auto',
+  },
+}
+
+const OrderButton = styled(Button)({
+  marginBottom: 30,
+  width: 350,
+  justifyContent: 'center',
+  alignItems: 'center',
+  alignSelf: 'center',
+})
 
 function RestaurantInfoScreen({route}) {
   const {restaurant} = route.params
+  const {addToCart} = useCart()
+  function handleAddToCart() {
+    addToCart(
+      {
+        name: 'Special Meal',
+        price: 1299,
+      },
+      restaurant,
+    )
+  }
   return (
     <SafeArea>
       <RestaurantRow restaurant={restaurant} />
@@ -46,6 +73,13 @@ function RestaurantInfoScreen({route}) {
           </List.Accordion>
         </List.Section>
       </ScrollView>
+      <OrderButton
+        icon="cart-arrow-down"
+        mode="contained"
+        onPress={handleAddToCart}
+      >
+        Order Special Meal for $12.99
+      </OrderButton>
     </SafeArea>
   )
 }
