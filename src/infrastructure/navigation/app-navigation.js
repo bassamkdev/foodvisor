@@ -2,8 +2,8 @@ import * as React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {RestaurantsStackScreen} from './restaurants-navigation'
 import {SettingsNavigator} from './settings.navigation'
+import {CheckoutNavigator} from './checkout.navigation'
 import {MapScreen} from '../../screens/map.screen'
-import {CheckoutScreen} from '../../screens/checkout.screen'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 import {SearchProvider} from '../../context/search.context'
@@ -45,7 +45,7 @@ function AppNavigation() {
           >
             <Tab.Screen name="Restaurants" component={RestaurantsStackScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="checkout" component={CheckoutScreen} />
+            <Tab.Screen name="checkout" component={CheckoutNavigator} />
             <Tab.Screen name="Settings" component={SettingsNavigator} />
           </Tab.Navigator>
         </CartProvider>

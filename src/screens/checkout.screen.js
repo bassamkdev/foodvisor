@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from '@emotion/native'
-import {ScrollView, View} from 'react-native'
 import {
   List,
   Button,
@@ -13,6 +12,8 @@ import {CreditCardInput} from '../components/creditCardInput'
 import {SafeArea, FullPageView} from '../components/lib'
 import {RestaurantRow} from '../components/restaurant-row'
 import {useCart} from '../context/cart.context'
+import {useAsync} from '../utils/hooks'
+import {pay} from '../services/stripe.service'
 
 const OrdersList = styled.ScrollView({
   flex: 2,
@@ -42,10 +43,39 @@ const PaymentInformationContainer = styled.View({
   alignItems: 'center',
 })
 
-function CheckoutScreen() {
-  const {cart, restaurant, total, clearCart} = useCart()
+const ErrorText = styled.Text({
+  color: '#d20f46',
+  fontSize: 18,
+  marginTop: 10,
+  backgroundColor: '#dee2e6',
+  padding: 10,
+})
+
+const GrayedOutText = styled(Title)({
+  color: 'gray',
+})
+
+function CheckoutScreen({navigation}) {
+  const {isLoading, isError, error, isSuccess, reset, run} = useAsync()
+  const {cart, restaurant, total, clearCart, token} = useCart()
   const [isPaying, setIsPaying] = React.useState(false)
   const [name, setName] = React.useState('')
+  function handlePayment() {
+    if (isError) {
+      reset()
+    }
+    run(pay(token, total))
+  }
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      clearCart()
+      setIsPaying(false)
+      setName('')
+      reset()
+      navigation.navigate('success')
+    }
+  }, [clearCart, isSuccess, navigation, reset])
 
   function handleCancelation() {
     setName('')
@@ -56,8 +86,12 @@ function CheckoutScreen() {
     return (
       <SafeArea>
         <FullPageView>
-          <Avatar.Icon size={80} icon="cart-off" />
-          <Title>Your cart is empty</Title>
+          <Avatar.Icon
+            size={80}
+            icon="cart-off"
+            theme={{colors: {primary: 'gray'}}}
+          />
+          <GrayedOutText>Your cart is empty</GrayedOutText>
         </FullPageView>
       </SafeArea>
     )
@@ -101,12 +135,19 @@ function CheckoutScreen() {
                 <Button mode="flat" color="#d20f46" onPress={handleCancelation}>
                   Cancel
                 </Button>
-                <Button mode="flat" color="#57cc99" onPress={() => {}}>
+                <Button
+                  mode="flat"
+                  color="#57cc99"
+                  disabled={!token}
+                  onPress={handlePayment}
+                  loading={isLoading}
+                >
                   Submit
                 </Button>
               </ButtonsContainer>
             </>
           ) : null}
+          {isError ? <ErrorText>{error}</ErrorText> : null}
         </PaymentInformationContainer>
       ) : (
         <ButtonsContainer>

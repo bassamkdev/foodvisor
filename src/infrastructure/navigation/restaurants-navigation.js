@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {Text, View} from 'react-native'
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack'
 import {RestaurantsScreen} from '../../screens/restaurants'
 import {RestaurantInfoScreen} from '../../screens/restaurantInfo'

@@ -2,7 +2,6 @@ import {locationTransform} from './location.service'
 import {useQuery} from 'react-query'
 import {host} from '../../utils/host'
 
-console.log(host)
 const getLocationConfig = query => {
   return {
     queryKey: ['location', {query}],

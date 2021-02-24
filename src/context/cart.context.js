@@ -7,6 +7,11 @@ function CartProvider(props) {
     (s, a) => ({...s, ...a}),
     {cart: [], restaurant: null, sum: 0},
   )
+  const [token, setToken] = React.useState(null)
+
+  function handleTokenChange(paymentToken) {
+    setToken(paymentToken)
+  }
 
   function add(item, rest) {
     if (restaurant && restaurant.placeId === rest.placeId) {
@@ -26,6 +31,8 @@ function CartProvider(props) {
     addToCart: add,
     clearCart: clear,
     total: sum,
+    handleTokenChange,
+    token,
   }
 
   return <CartContext.Provider value={values} {...props} />
