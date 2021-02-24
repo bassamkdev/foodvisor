@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/native": "^11.0.0",
     "@emotion/react": "^11.1.4",
+    "@expo-google-fonts/carter-one": "^0.1.0",
     "@expo-google-fonts/lato": "^0.1.0",
     "@expo-google-fonts/maven-pro": "^0.1.0",
     "@expo-google-fonts/oswald": "^0.1.0",

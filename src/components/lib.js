@@ -47,6 +47,13 @@ const ErrorText = styled.Text({
   color: 'red',
 })
 
+const Logo = styled.Text(({theme}) => ({
+  fontFamily: theme.fonts.brand,
+  color: theme.colors.brand.muted,
+  fontSize: theme.fontSizes.h3,
+  padding: 0,
+}))
+
 function FullPageSpinner() {
   return (
     <FullPageView>
@@ -69,4 +76,12 @@ function FullPageError({error, action}) {
   )
 }
 
-export {Tag, TagText, SafeArea, FullPageSpinner, FullPageError, FullPageView}
+export {
+  Tag,
+  TagText,
+  SafeArea,
+  FullPageSpinner,
+  FullPageError,
+  FullPageView,
+  Logo,
+}

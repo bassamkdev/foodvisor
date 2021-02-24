@@ -5,11 +5,10 @@ import {Text} from 'react-native'
 import {useAsync} from '../utils/hooks'
 import {useAuth} from '../context/auth.context'
 import LottieView from 'lottie-react-native'
+import {FullPageView, Logo} from '../components/lib'
 
 const Background = styled.ImageBackground({
   flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
 })
 
 const Cover = styled.View({
@@ -30,20 +29,12 @@ const Title = styled.Text({}, ({theme}) => ({
 const Form = styled.View({
   justifyContent: 'center',
   alignItems: 'center',
-  marginTop: 100,
 })
 
 const FormText = styled.Text(({theme}) => ({
   fontFamily: theme.fonts.body,
   color: theme.colors.ui.tertiary,
 }))
-
-const Logo = styled.Image({
-  width: 300,
-  resizeMode: 'center',
-  position: 'absolute',
-  top: 50,
-})
 
 Button.defaultProps = {
   contentStyle: {
@@ -79,11 +70,10 @@ TextInput.defaultProps = {
   underlineColor: 'rgba(255,255,255,.1)',
 }
 
-const AnimationWrapper = styled.View({
-  width: '50%',
-  height: '20%',
-  position: 'absolute',
-  top: '15%',
+const ScreenWraper = styled.View({
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
 })
 
 function LoginForm({handleToggle}) {
@@ -219,20 +209,14 @@ function AuthScreen({navigation}) {
   return (
     <Background source={require('../../assets/background.jpg')} blurRadius={10}>
       <Cover />
-      <Logo source={require('../../assets/foodvisor-Logo.png')} />
-      <AnimationWrapper>
-        <LottieView
-          source={require('../../assets/animation.json')}
-          key="animation"
-          autoPlay
-          resizeMode="cover"
-        />
-      </AnimationWrapper>
-      {isSigningUp ? (
-        <RegisterForm handleToggle={setIsSigningUp} />
-      ) : (
-        <LoginForm handleToggle={setIsSigningUp} />
-      )}
+      <ScreenWraper>
+        <Logo>foodvisor</Logo>
+        {isSigningUp ? (
+          <RegisterForm handleToggle={setIsSigningUp} />
+        ) : (
+          <LoginForm handleToggle={setIsSigningUp} />
+        )}
+      </ScreenWraper>
     </Background>
   )
 }

@@ -2,6 +2,7 @@ export const fonts = {
   body: 'Lato_400Regular',
   heading: 'MavenPro_400Regular',
   monospace: 'Lato_400Regular',
+  brand: 'CarterOne_400Regular',
 }
 
 export const fontWeights = {
