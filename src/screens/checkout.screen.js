@@ -28,8 +28,8 @@ const CartActionButton = styled(Button)({
   width: 150,
   marginBottom: 20,
   marginTop: 20,
-  justifyContent: 'center',
-  alignItems: 'center',
+  // justifyContent: 'center',
+  // alignItems: 'center',
 })
 
 const ButtonsContainer = styled.View({
@@ -103,6 +103,7 @@ function CheckoutScreen({navigation}) {
         <List.Section>
           {cart.map(item => (
             <List.Item
+              key={item.id}
               title={item.name}
               right={props => <Caption>{`$${item.price / 100}`}</Caption>}
             />
@@ -132,7 +133,12 @@ function CheckoutScreen({navigation}) {
             <>
               <CreditCardInput name={name} />
               <ButtonsContainer>
-                <Button mode="flat" color="#d20f46" onPress={handleCancelation}>
+                <Button
+                  mode="flat"
+                  color="#d20f46"
+                  onPress={handleCancelation}
+                  contentStyle={{alignSelf: 'center'}}
+                >
                   Cancel
                 </Button>
                 <Button
@@ -141,6 +147,7 @@ function CheckoutScreen({navigation}) {
                   disabled={!token}
                   onPress={handlePayment}
                   loading={isLoading}
+                  contentStyle={{alignSelf: 'center'}}
                 >
                   Submit
                 </Button>
@@ -156,6 +163,7 @@ function CheckoutScreen({navigation}) {
             mode={'contained'}
             onPress={clearCart}
             color="#d20f46"
+            contentStyle={{alignSelf: 'center'}}
           >
             Clear Cart
           </CartActionButton>
@@ -164,6 +172,7 @@ function CheckoutScreen({navigation}) {
             mode={'contained'}
             color="#57cc99"
             onPress={() => setIsPaying(true)}
+            contentStyle={{alignSelf: 'center'}}
           >
             Pay Now
           </CartActionButton>

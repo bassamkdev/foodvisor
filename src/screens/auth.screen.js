@@ -4,9 +4,7 @@ import {TextInput, Button} from 'react-native-paper'
 import {Text} from 'react-native'
 import {useAsync} from '../utils/hooks'
 import {useAuth} from '../context/auth.context'
-import LottieView from 'lottie-react-native'
-import {FullPageView, Logo} from '../components/lib'
-
+import {Logo} from '../components/lib'
 const Background = styled.ImageBackground({
   flex: 1,
 })
@@ -76,6 +74,14 @@ const ScreenWraper = styled.View({
   justifyContent: 'space-evenly',
 })
 
+const ErrorText = styled.Text({
+  color: '#d20f46',
+  fontSize: 18,
+  marginTop: 10,
+  backgroundColor: '#dee2e6',
+  padding: 10,
+})
+
 function LoginForm({handleToggle}) {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -108,7 +114,7 @@ function LoginForm({handleToggle}) {
         autoCapitalize="none"
         onChangeText={setPassword}
       />
-      {isError ? <Text style={{color: 'red'}}>{error.toString()}</Text> : null}
+      {isError ? <ErrorText>{error.toString()}</ErrorText> : null}
       <Button onPress={handleSubmit} loading={isLoading}>
         login
       </Button>
@@ -182,7 +188,7 @@ function RegisterForm({handleToggle}) {
         autoCapitalize="none"
         onChangeText={setRepeatedPassword}
       />
-      {isError ? <Text style={{color: 'red'}}>{error.toString()}</Text> : null}
+      {isError ? <ErrorText>{error.toString()}</ErrorText> : null}
       <Button
         loading={isLoading}
         onPress={handleRegister}

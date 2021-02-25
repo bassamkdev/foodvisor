@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {List} from 'react-native-paper'
 import styled from '@emotion/native'
-
+import {v4 as uuidv4} from 'uuid'
 import {RestaurantRow} from '../components/restaurant-row'
 import {SafeArea} from '../components/lib'
 import {ScrollView} from 'react-native-gesture-handler'
@@ -28,6 +28,7 @@ function RestaurantInfoScreen({route}) {
   function handleAddToCart() {
     addToCart(
       {
+        id: uuidv4(),
         name: 'Special Meal',
         price: 1299,
       },
