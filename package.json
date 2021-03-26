@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@emotion/native": "^11.0.0",
@@ -20,6 +20,7 @@
     "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
+    "@types/jest": "^26.0.22",
     "camelize": "^1.0.0",
     "expo": "~40.0.0",
     "expo-camera": "~9.1.0",
@@ -48,13 +49,18 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@testing-library/react-native": "^7.1.0",
+    "@testing-library/jest-native": "^4.0.1",
+    "@testing-library/react-native": "^7.2.0",
+    "@testing-library/user-event": "^13.0.15",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-testing-library": "^3.10.2",
     "jest-expo": "^40.0.2",
     "msw": "^0.26.2",
     "prettier": "^2.2.1",
+    "query-extensions": "^0.0.4",
     "react-test-renderer": "^16.11.0"
   },
   "private": true,
@@ -68,13 +74,20 @@
       "prettier/prettier": "off"
     },
     "plugins": [
-      "prettier"
+      "prettier",
+      "jest",
+      "testing-library"
     ]
   },
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
-    ]
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect",
+      "/Users/bassam/Projects/foodvisor/setupTests.js"
+    ], 
+    "setupFiles": ["./mock.js"]
   }
 }

@@ -28,8 +28,6 @@ const CartActionButton = styled(Button)({
   width: 150,
   marginBottom: 20,
   marginTop: 20,
-  // justifyContent: 'center',
-  // alignItems: 'center',
 })
 
 const ButtonsContainer = styled.View({

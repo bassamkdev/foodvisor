@@ -1,7 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/native'
 import {TextInput, Button} from 'react-native-paper'
-import {Text} from 'react-native'
 import {useAsync} from '../utils/hooks'
 import {useAuth} from '../context/auth.context'
 import {Logo} from '../components/lib'
@@ -87,7 +86,6 @@ function LoginForm({handleToggle}) {
   const [password, setPassword] = React.useState('')
   const {run, reset, isLoading, isError, error} = useAsync()
   const {login} = useAuth()
-
   function handleSubmit() {
     if (error) {
       reset()
@@ -95,11 +93,12 @@ function LoginForm({handleToggle}) {
     run(login(email, password))
   }
   return (
-    <Form>
-      <Title>Login</Title>
+    <Form accessibilityLabel='login form'>
+      <Title accessibilityLabel='login form title'>Login</Title>
 
       <TextInput
         label="E-mail"
+        accessibilityLabel='email input'
         value={email}
         textContentType="emailAddress"
         keyboardType="email-address"
@@ -108,18 +107,20 @@ function LoginForm({handleToggle}) {
       />
       <TextInput
         label="Password"
+        accessibilityLabel='password input'
         value={password}
         textContentType="password"
         secureTextEntry
         autoCapitalize="none"
         onChangeText={setPassword}
       />
-      {isError ? <ErrorText>{error.toString()}</ErrorText> : null}
-      <Button onPress={handleSubmit} loading={isLoading}>
+      {isError ? <ErrorText accessibilityLabel='login error'>{error.toString()}</ErrorText> : null}
+      <Button onPress={handleSubmit} loading={isLoading} accessibilityLabel='login button'>
         login
       </Button>
       <FormText>Don't have an account?</FormText>
       <Button
+        accessibilityLabel='switch to register'
         mode="text"
         style={{}}
         color="#e9ecef"
@@ -154,10 +155,11 @@ function RegisterForm({handleToggle}) {
   }
 
   return (
-    <Form>
+    <Form accessibilityLabel='registeration form' >
       <Title>Register</Title>
 
       <TextInput
+      accessibilityLabel='email input'
         label="E-mail"
         value={email}
         textContentType="emailAddress"
@@ -166,6 +168,7 @@ function RegisterForm({handleToggle}) {
         onChangeText={setEmail}
       />
       <TextInput
+      accessibilityLabel='password input'
         label="Password"
         value={password}
         textContentType="password"
@@ -181,6 +184,7 @@ function RegisterForm({handleToggle}) {
             placeholder: '#adb5bd',
           },
         }}
+        accessibilityLabel='retype password'
         label="Repeat Password"
         value={repeatedPassword}
         textContentType="password"
@@ -188,8 +192,9 @@ function RegisterForm({handleToggle}) {
         autoCapitalize="none"
         onChangeText={setRepeatedPassword}
       />
-      {isError ? <ErrorText>{error.toString()}</ErrorText> : null}
+      {isError ? <ErrorText accessibilityLabel='registeration error'>{error.toString()}</ErrorText> : null}
       <Button
+      accessibilityLabel='register button'
         loading={isLoading}
         onPress={handleRegister}
         disabled={!isPasswordMatch}
@@ -198,6 +203,7 @@ function RegisterForm({handleToggle}) {
       </Button>
       <FormText>Already have an account?</FormText>
       <Button
+      accessibilityLabel='switch to login'
         mode="text"
         style={{}}
         color="#e9ecef"
@@ -216,7 +222,7 @@ function AuthScreen({navigation}) {
     <Background source={require('../../assets/background.jpg')} blurRadius={10}>
       <Cover />
       <ScreenWraper>
-        <Logo>foodvisor</Logo>
+        <Logo testID='logo'>foodvisor</Logo>
         {isSigningUp ? (
           <RegisterForm handleToggle={setIsSigningUp} />
         ) : (
@@ -227,4 +233,4 @@ function AuthScreen({navigation}) {
   )
 }
 
-export {AuthScreen}
+export {AuthScreen, RegisterForm, LoginForm}
