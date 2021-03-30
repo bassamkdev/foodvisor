@@ -15,11 +15,12 @@ const SearchBarContainer = styled.View(
   }),
 )
 
-function SearchBar({icon}) {
+function SearchBar({icon, iconA11yLabel}) {
   const {handleSubmit} = useSearch()
   return (
     <SearchBarContainer>
       <Searchbar
+        searchAccessibilityLabel={iconA11yLabel || 'search'}
         icon={icon || 'search'}
         placeholder="Search"
         onSubmitEditing={({nativeEvent: {text}}) => {

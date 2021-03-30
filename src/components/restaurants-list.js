@@ -12,18 +12,18 @@ import {FadeInView} from './animation'
 function RestaurantsList({navigate}) {
   const {keyword} = useSearch()
   const location = useLocation(keyword)
-  const locationStrign = `${location.lat},${location.lng}`
+  const locationString = `${location.lat},${location.lng}`
 
   const {data: restaurants, isLoading, isError} = useRestaurants(
-    locationStrign,
-    {enabled: !!locationStrign},
+    locationString,
+    {enabled: !!locationString},
   )
   const renderItem = React.useCallback(
     function renderItem({item}) {
       const handlePress = () => navigate('restaurantInfo', {restaurant: item})
       return (
         <FadeInView duration={500}>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity accessibilityLabel='restaurant' onPress={handlePress}>
             <RestaurantRow restaurant={item} />
           </TouchableOpacity>
         </FadeInView>
@@ -40,6 +40,7 @@ function RestaurantsList({navigate}) {
 
   return (
     <FlatList
+      accessibilityLabel='restaurants list'
       data={restaurants}
       keyExtractor={item => item.placeId}
       renderItem={renderItem}

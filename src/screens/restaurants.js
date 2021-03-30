@@ -24,6 +24,8 @@ function RestaurantsScreen({navigation}) {
     <SafeArea>
       <SearchBarContainer>
         <Searchbar
+          accessibilityLabel='search'
+          searchAccessibilityLabel='favourites'
           icon={isFavouritesOpen ? 'heart' : 'heart-outline'}
           placeholder="Search"
           onSubmitEditing={({nativeEvent: {text}}) => {
@@ -36,7 +38,7 @@ function RestaurantsScreen({navigation}) {
         <FavouritesBar navigate={navigation.navigate} />
       ) : null}
 
-      <RestaurantsList navigate={navigation.navigate} />
+      <RestaurantsList testID='restaurants list' navigate={navigation.navigate} />
     </SafeArea>
   )
 }

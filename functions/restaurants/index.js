@@ -27,7 +27,7 @@ module.exports.restaurantsRequest = async (request, response, client) => {
     if (data) {
       data.results = data.results.map(addMockImage)
     }
-    response.json(data)
+    return response.json(data)
   }
   try {
     const res = await client.placesNearby({

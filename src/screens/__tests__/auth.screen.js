@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render, fireEvent, waitFor} from "../../test/test-utils";
+import { authRender, fireEvent, waitFor} from "../../test/test-utils";
 import { AuthScreen, RegisterForm, LoginForm } from "../auth.screen";
 import {useAuth} from '../../context/auth.context'
 
@@ -9,7 +9,7 @@ jest.mock('../../context/auth.context')
 test('authScreen renders logo and toggle between login and registeration forms', async () => {
     const mockLoginFunction = jest.fn(() => new Promise.resolve())
     useAuth.mockReturnValue({login: mockLoginFunction})
-    const {getByA11yLabel, getByText, getByTestId} = render(<AuthScreen/>
+    const {getByA11yLabel, getByText, getByTestId} = authRender(<AuthScreen/>
     )
 
     expect(getByTestId(/logo/i)).not.toBeNull()
@@ -30,7 +30,7 @@ test('login form has email and and password fields, login button and toggle form
     const mockLoginFunction = jest.fn()
     mockLoginFunction.mockResolvedValueOnce()
     useAuth.mockReturnValueOnce({login: mockLoginFunction})
-    const {getByA11yLabel} = render(<LoginForm/>)
+    const {getByA11yLabel} = authRender(<LoginForm/>)
 
     expect(getByA11yLabel(/email input/i)).not.toBeNull()
     expect(getByA11yLabel(/password input/i)).not.toBeNull()
@@ -47,7 +47,7 @@ test('login form renders error message when login fails ', async () => {
     const mockLoginFunction = jest.fn()
     mockLoginFunction.mockRejectedValueOnce(error)
     useAuth.mockReturnValueOnce({login: mockLoginFunction})
-    const {getByA11yLabel} = render(<LoginForm/>)
+    const {getByA11yLabel} = authRender(<LoginForm/>)
 
     const loginButton = getByA11yLabel(/login button/i)
     fireEvent.press(loginButton)
@@ -66,7 +66,7 @@ test('register form has email password and repeat password fields that have to m
         password: 'fake1234',
     }
 
-    const {getByA11yLabel} = render(<RegisterForm/>)
+    const {getByA11yLabel} = authRender(<RegisterForm/>)
     expect(getByA11yLabel(/email input/i)).not.toBeNull()
     expect(getByA11yLabel(/password input/i)).not.toBeNull()
     expect(getByA11yLabel(/retype password/i)).not.toBeNull()
@@ -92,7 +92,7 @@ test('register form renders error message when registeration fails ', async () =
     const mockRegisterFunction = jest.fn()
     mockRegisterFunction.mockRejectedValueOnce(error)
     useAuth.mockReturnValueOnce({register: mockRegisterFunction})
-    const {getByA11yLabel} = render(<RegisterForm/>)
+    const {getByA11yLabel} = authRender(<RegisterForm/>)
 
     const registerButton = getByA11yLabel(/register button/i)
     fireEvent.press(registerButton)

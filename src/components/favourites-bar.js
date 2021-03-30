@@ -12,7 +12,7 @@ const RestaurantWrapper = styled.TouchableOpacity({
 function FavouritesBar({navigate}) {
   const {favourites} = useFavourites()
   return (
-    <FavouritesWrapper>
+    <FavouritesWrapper accessibilityLabel='favourite restaurants'>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {Object.keys(favourites).length
           ? Object.keys(favourites).map((key, index) => {

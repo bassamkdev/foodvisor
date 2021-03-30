@@ -1,6 +1,7 @@
 import {restaurantTransform} from './restaurant.service'
 import {useQuery} from 'react-query'
-import {host} from '../../utils/host'
+import {host, isMock} from '../../utils/host'
+
 // const restaurantsQueryConfig = {
 //   staleTime: 1000 * 60 * 60,
 //   cacheTime: 1000 * 60 * 60,
@@ -10,7 +11,7 @@ function useRestaurants(query, options = {}) {
   const result = useQuery({
     queryKey: ['restaurants', {query}],
     queryFn: () =>
-      fetch(`${host}restaurants?location=${query}`)
+      fetch(`${host}restaurants?location=${query}&mock=${isMock}`)
         .then(res => {
           return res.json()
         })

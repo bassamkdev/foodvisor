@@ -21,23 +21,24 @@ function RestaurantRow({restaurant = {}, ...props}) {
   } = restaurant
 
   return (
-    <CardContainer {...props}>
+    <CardContainer {...props} accessibilityLabel='restaurant information'>
       <Favourite restaurant={restaurant} />
       <CardImage
+        accessibilityLabel='restaurant photo'
         key={name}
-        source={{uri: photos[0], cache: 'force-cache'}}
+        source={{uri: photos?.[0] , cache: 'force-cache'}}
         defaultSource={require('../../assets/adaptive-icon.png')}
       />
-      <CardTitle>{name}</CardTitle>
+      <CardTitle accessibilityLabel='restaurant name'>{name}</CardTitle>
       <Card.Content>
-        <ContentText>{address}</ContentText>
+        <ContentText accessibilityLabel='restaurant address'>{address}</ContentText>
         <CardTagsContainer>
-          <Tag>
+          <Tag accessibilityLabel='restaurant rating'>
             <TagText>{rating?.toPrecision(2)}</TagText>
             <SvgXml xml={star} width={16} height={16} />
           </Tag>
           {icon ? (
-            <Tag>
+            <Tag accessibilityLabel='restaurant icon'>
               <Image
                 source={{uri: icon}}
                 style={css`
@@ -48,12 +49,12 @@ function RestaurantRow({restaurant = {}, ...props}) {
             </Tag>
           ) : null}
           {isOpenNow ? (
-            <Tag>
+            <Tag accessibilityLabel='open now'>
               <SvgXml xml={openNow} width={16} height={16} />
             </Tag>
           ) : null}
           {isClosedTemporarily ? (
-            <Tag>
+            <Tag accessibilityLabel='closed temporarily'>
               <TagText color="red">TEMPORARILY CLOSED</TagText>
             </Tag>
           ) : null}

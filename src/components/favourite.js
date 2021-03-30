@@ -20,6 +20,7 @@ function Favourite({restaurant}) {
   const isFavourite = !!favourites[restaurant.name]
   return (
     <FavouriteButton
+    accessibilityLabel='favourite icon'
       onPress={() =>
         isFavourite
           ? removeRestaurantFromFavourites(restaurant)

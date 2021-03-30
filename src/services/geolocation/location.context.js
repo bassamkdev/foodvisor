@@ -1,12 +1,12 @@
 import {locationTransform} from './location.service'
 import {useQuery} from 'react-query'
-import {host} from '../../utils/host'
+import {host, isMock} from '../../utils/host'
 
 const getLocationConfig = query => {
   return {
     queryKey: ['location', {query}],
     queryFn: () =>
-      fetch(`${host}geocode?city=${query}`)
+      fetch(`${host}geocode?city=${query}&mock=${isMock}`)
         .then(res => res.json())
         .then(locationTransform),
 
