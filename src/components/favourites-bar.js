@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/native'
-import {Text, ScrollView} from 'react-native'
+import {ScrollView} from 'react-native'
 import {useFavourites} from '../context/favourites.context'
 import {Callout} from './map-callout'
 
