@@ -2,7 +2,6 @@ import * as React from 'react'
 import styled from '@emotion/native'
 import {WebView} from 'react-native-webview'
 import {Platform} from 'react-native'
-import {Favourite} from './favourite'
 
 const CalloutImage = styled.Image(
   {
@@ -35,9 +34,9 @@ function Callout({restaurant}) {
       {Platform.OS === 'android' ? (
         <CalloutWebView source={{uri: restaurant.photos[0]}} />
       ) : (
-        <CalloutImage source={{uri: restaurant.photos[0]}} />
+        <CalloutImage accessibilityLabel='restaurant image' source={{uri: restaurant.photos[0]}} />
       )}
-      <CalloutText>{restaurant.name}</CalloutText>
+      <CalloutText accessibilityLabel='restaurant name'>{restaurant.name}</CalloutText>
     </CalloutContainer>
   )
 }

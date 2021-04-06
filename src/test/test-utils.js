@@ -23,6 +23,17 @@ function authRender(ui, options={}) {
     return render(ui, {wrapper: Wrapper, ...options})
 }
 
+function themedRender(ui, options={}) {
+    const Wrapper = ({children}) => {
+        return (
+            <ThemeProvider theme={theme}>
+                {children}
+            </ThemeProvider>
+        )
+    }
+    return render(ui, {wrapper: Wrapper, ...options})
+}
+
 function appRender(ui, options={}) {
    
         const Wrapper = ({children}) => {
@@ -45,4 +56,4 @@ function appRender(ui, options={}) {
 
 
 export * from '@testing-library/react-native'
-export {authRender, appRender, queryCache}
+export {authRender, appRender, themedRender, queryCache}
