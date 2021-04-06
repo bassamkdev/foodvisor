@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { appRender, fireEvent, waitFor, act } from "../../test/test-utils";
+import { appRender, fireEvent} from "../../test/test-utils";
 import faker from 'faker'
 import { Favourite } from "../favourite";
 import { useFavourites } from "../../context/favourites.context";
@@ -26,13 +26,12 @@ test('should call add function when is not set as favourtie ', async() => {
         removeRestaurantFromFavourites: mockRemoveRestaurantFromFavourites,
       })
 
-     const {getByA11yLabel, debug} = appRender(
+     const {getByA11yLabel} = appRender(
         <Favourite restaurant={mockRestaurant}/>
     )
     fireEvent.press(getByA11yLabel(/favourite icon/i))
         expect(mockAddRestaurantToFavourites).toHaveBeenCalledTimes(1)
         expect(mockRemoveRestaurantFromFavourites).not.toHaveBeenCalled()
-        debug()
 })
 
 test('should call remove function when is not set as favourtie ', async() => {

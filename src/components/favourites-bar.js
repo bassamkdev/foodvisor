@@ -13,11 +13,12 @@ function FavouritesBar({navigate}) {
   const {favourites} = useFavourites()
   return (
     <FavouritesWrapper accessibilityLabel='favourite restaurants'>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView accessibilityLabel='favourites' horizontal showsHorizontalScrollIndicator={false}>
         {Object.keys(favourites).length
           ? Object.keys(favourites).map((key, index) => {
               return (
                 <RestaurantWrapper
+                  accessibilityLabel={`${favourites[key].name}`}
                   key={index}
                   onPress={() =>
                     navigate('restaurantInfo', {restaurant: favourites[key]})
