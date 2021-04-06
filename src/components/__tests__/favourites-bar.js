@@ -6,7 +6,7 @@ import {useFavourites} from '../../context/favourites.context'
 
 jest.mock('../../context/favourites.context')
 
-test('should render restaurant info', async () => {
+test('should render favourites and navigate on press', async () => {
     const mockNavigate = jest.fn()
     const mockRestaurant = {
         name: faker.lorem.word(),

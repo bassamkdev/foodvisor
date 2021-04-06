@@ -13,7 +13,7 @@ function FadeInView({duration = 1500, children, ...props}) {
   }, [duration, fadeAnim])
 
   return (
-    <Animated.View style={{...props.style, opacity: fadeAnim}}>
+    <Animated.View testID='fadeAnim' style={{...props.style, opacity: fadeAnim}}>
       {children}
     </Animated.View>
   )
