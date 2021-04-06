@@ -22,7 +22,6 @@ function CreditCardInput({name}) {
       handleTokenChange(null)
     }
   }
-  return <LiteCreditCardInput onChange={handleInfoChange} />
+  return <LiteCreditCardInput  onChange={handleInfoChange} />
 }
-
 export {CreditCardInput}

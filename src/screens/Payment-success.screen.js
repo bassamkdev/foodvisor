@@ -5,7 +5,7 @@ import {FullPageView, SafeArea} from '../components/lib'
 function SuccessScreen() {
   return (
     <SafeArea>
-      <FullPageView>
+      <FullPageView accessibilityLabel='success'>
         <Avatar.Icon
           icon="check-bold"
           size={80}

@@ -64,7 +64,6 @@ function CheckoutScreen({navigation}) {
     }
     run(pay(token, total))
   }
-
   React.useEffect(() => {
     if (isSuccess) {
       clearCart()
@@ -132,6 +131,7 @@ function CheckoutScreen({navigation}) {
               <CreditCardInput name={name} />
               <ButtonsContainer>
                 <Button
+                accessibilityLabel='cancel payment'
                   mode="flat"
                   color="#d20f46"
                   onPress={handleCancelation}
@@ -140,6 +140,7 @@ function CheckoutScreen({navigation}) {
                   Cancel
                 </Button>
                 <Button
+                  accessibilityLabel='submit payment'
                   mode="flat"
                   color="#57cc99"
                   disabled={!token}
@@ -157,6 +158,7 @@ function CheckoutScreen({navigation}) {
       ) : (
         <ButtonsContainer>
           <CartActionButton
+          accessibilityLabel='clear cart'
             icon="cart-off"
             mode={'contained'}
             onPress={clearCart}
@@ -166,6 +168,7 @@ function CheckoutScreen({navigation}) {
             Clear Cart
           </CartActionButton>
           <CartActionButton
+          accessibilityLabel='pay now'
             icon="cash-usd"
             mode={'contained'}
             color="#57cc99"
