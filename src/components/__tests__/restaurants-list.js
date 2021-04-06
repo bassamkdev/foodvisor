@@ -19,10 +19,10 @@ test('should render a list of restaurants and navigate to restaurants info on pr
     <RestaurantsList navigate={mockNavigate} />,
   )
   expect(getByA11yRole('progressbar')).not.toBeNull()
-
   await waitForElementToBeRemoved(() => getByA11yRole('progressbar'))
-  const restaurantInstance = getAllByA11yLabel(/restaurant/i)[1]
-  expect(getAllByA11yLabel(/restaurant/i)).toHaveLength(11)
-  fireEvent.press(restaurantInstance)
+  
+  const restaurants = getAllByA11yLabel(/restaurant/i)
+  
+  fireEvent.press(restaurants[1])
   expect(mockNavigate).toHaveBeenCalledTimes(1)
 })
