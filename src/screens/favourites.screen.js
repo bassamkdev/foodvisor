@@ -13,7 +13,7 @@ function FavouritesScreen({navigation}) {
   const {favourites} = useFavourites()
   return (
     <SafeArea>
-      <FavouritesWrapper>
+      <FavouritesWrapper accessibilityLabel='favourites-list'>
         {Object.keys(favourites).length
           ? Object.keys(favourites).map((key, index) => {
               return (

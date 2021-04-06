@@ -34,8 +34,8 @@ function SettingsScreen({navigation}) {
 
   return (
     <SafeArea>
-      <AvatarContainer>
-        <TouchableOpacity onPress={() => navigation.navigate('camera')}>
+      <AvatarContainer >
+        <TouchableOpacity accessibilityLabel='profile picture' onPress={() => navigation.navigate('camera')}>
           {imageUri ? (
             <Avatar.Image size={150} source={{uri: imageUri}} />
           ) : (
@@ -46,6 +46,7 @@ function SettingsScreen({navigation}) {
       </AvatarContainer>
       <List.Section>
         <SettingsItem
+          accessibilityLabel='favourites'
           title="Favourites"
           description="View your favourites"
           left={props => <List.Icon {...props} color="black" icon="heart" />}

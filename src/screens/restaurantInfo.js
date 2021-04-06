@@ -39,7 +39,7 @@ function RestaurantInfoScreen({route}) {
     <SafeArea>
       <RestaurantRow restaurant={restaurant} />
       <ScrollView>
-        <List.Section title="Menu">
+        <List.Section title="Menu" accessibilityLabel='menu'>
           <List.Accordion
             title="Breakfast"
             left={props => <List.Icon {...props} icon="coffee" />}

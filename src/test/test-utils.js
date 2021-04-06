@@ -6,6 +6,8 @@ import {QueryClient, QueryClientProvider, QueryCache} from 'react-query'
 import { NavigationContainer } from "@react-navigation/native";
 import { SearchProvider } from "../context/search.context";
 import { FavouritesProvider } from "../context/favourites.context";
+import { CartProvider } from "../context/cart.context";
+
 
 const queryCache = new QueryCache()
 const queryClient = new QueryClient({queryCache})
@@ -41,11 +43,9 @@ function appRender(ui, options={}) {
                 <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={theme}>
                 <SearchProvider>
-                {/* <FavouritesProvider> */}
                 <NavigationContainer>
                     {children}
                 </NavigationContainer>
-                {/* </FavouritesProvider> */}
                 </SearchProvider>
                 </ThemeProvider>
             </QueryClientProvider>
