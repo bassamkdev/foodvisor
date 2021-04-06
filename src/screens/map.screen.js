@@ -23,6 +23,7 @@ function MapScreen({navigation}) {
     <>
       <SearchBar icon="map-outline" />
       <MapView
+      testID='map screen'
         style={{height: '100%'}}
         region={{
           latitude: location.lat || 0,

@@ -81,7 +81,7 @@ function CheckoutScreen({navigation}) {
 
   if (!cart.length) {
     return (
-      <SafeArea>
+      <SafeArea testID='checkout screen'>
         <FullPageView>
           <Avatar.Icon
             size={80}
@@ -94,7 +94,7 @@ function CheckoutScreen({navigation}) {
     )
   }
   return (
-    <SafeArea>
+    <SafeArea testID='checkout screen'>
       <RestaurantRow restaurant={restaurant} />
       <OrdersList>
         <List.Section>

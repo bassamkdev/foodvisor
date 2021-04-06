@@ -33,7 +33,7 @@ function SettingsScreen({navigation}) {
   })
 
   return (
-    <SafeArea>
+    <SafeArea testID='settings screen'>
       <AvatarContainer >
         <TouchableOpacity accessibilityLabel='profile picture' onPress={() => navigation.navigate('camera')}>
           {imageUri ? (

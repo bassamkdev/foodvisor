@@ -21,7 +21,7 @@ function RestaurantsScreen({navigation}) {
   const {handleSubmit} = useSearch()
   const [isFavouritesOpen, setIsFavouritesOpen] = React.useState(false)
   return (
-    <SafeArea>
+    <SafeArea testID='restaurants screen'>
       <SearchBarContainer>
         <Searchbar
           accessibilityLabel='search'

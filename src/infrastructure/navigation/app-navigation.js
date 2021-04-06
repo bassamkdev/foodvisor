@@ -30,28 +30,32 @@ function setScreenOptions({route}) {
   }
 }
 
+const TabNavigator = (
+  <Tab.Navigator
+  initialRouteName="Restaurants"
+  screenOptions={setScreenOptions}
+  tabBarOptions={{
+    activeTintColor: '#57cc99',
+    inactiveTintColor: 'gray',
+  }}
+>
+  <Tab.Screen name="Restaurants" component={RestaurantsStackScreen} />
+  <Tab.Screen name="Map" component={MapScreen} />
+  <Tab.Screen name="checkout" component={CheckoutNavigator} />
+  <Tab.Screen name="Settings" component={SettingsNavigator} />
+</Tab.Navigator>
+)
+
 function AppNavigation() {
   return (
     <SearchProvider>
       <FavouritesProvider>
         <CartProvider>
-          <Tab.Navigator
-            initialRouteName="Restaurants"
-            screenOptions={setScreenOptions}
-            tabBarOptions={{
-              activeTintColor: '#57cc99',
-              inactiveTintColor: 'gray',
-            }}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantsStackScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="checkout" component={CheckoutNavigator} />
-            <Tab.Screen name="Settings" component={SettingsNavigator} />
-          </Tab.Navigator>
+          {TabNavigator}
         </CartProvider>
       </FavouritesProvider>
     </SearchProvider>
   )
 }
 
-export {AppNavigation}
+export {AppNavigation, TabNavigator}
