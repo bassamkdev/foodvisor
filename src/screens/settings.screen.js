@@ -35,7 +35,7 @@ function SettingsScreen({navigation}) {
   return (
     <SafeArea testID='settings screen'>
       <AvatarContainer >
-        <TouchableOpacity accessibilityLabel='profile picture' onPress={() => navigation.navigate('camera')}>
+        <TouchableOpacity accessibilityLabel='profile picture' onPress={() => {navigation.navigate('camera')}}>
           {imageUri ? (
             <Avatar.Image size={150} source={{uri: imageUri}} />
           ) : (
@@ -53,6 +53,7 @@ function SettingsScreen({navigation}) {
           onPress={() => navigation.navigate('favourites')}
         />
         <SettingsItem
+          accessibilityLabel='Log out'
           title="Logout"
           left={props => <List.Icon {...props} color="black" icon="door" />}
           onPress={signOut}

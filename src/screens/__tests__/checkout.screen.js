@@ -37,7 +37,7 @@ function renderCheckout() {
     return {mockNavigation, mockCart, mockClearCart, ...utils}
 }
 
-describe('accepts card info and makes successful payment', () => {
+describe('checkout screen functionality', () => {
     useFavourites.mockReturnValue({
         favourites: {}
     })
