@@ -58,6 +58,7 @@ function CheckoutScreen({navigation}) {
   const {cart, restaurant, total, clearCart, token} = useCart()
   const [isPaying, setIsPaying] = React.useState(false)
   const [name, setName] = React.useState('')
+
   function handlePayment() {
     if (isError) {
       reset()
@@ -108,6 +109,7 @@ function CheckoutScreen({navigation}) {
         </List.Section>
       </OrdersList>
       <List.Item
+      testID='total'
         title="Total:"
         right={props => <Caption>{`$${total / 100}`}</Caption>}
       />

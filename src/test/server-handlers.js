@@ -16,6 +16,9 @@ const handlers = [
       data.results = data.results.map(addMockImage)
     }
     return res(ctx.json(data))
+  }),
+  rest.post(`${host}pay`, async(req, res, ctx) => {
+    return res(ctx.json('success'))
   })
 ]
 
