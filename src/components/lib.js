@@ -56,7 +56,7 @@ const Logo = styled.Text(({theme}) => ({
 
 function FullPageSpinner() {
   return (
-    <FullPageView>
+    <FullPageView >
       <ActivityIndicator />
     </FullPageView>
   )

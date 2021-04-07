@@ -30,7 +30,7 @@ const CalloutContainer = styled.View({
 })
 function Callout({restaurant}) {
   return (
-    <CalloutContainer>
+    <CalloutContainer >
       {Platform.OS === 'android' ? (
         <CalloutWebView source={{uri: restaurant.photos[0]}} />
       ) : (

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { appRender, fireEvent, waitFor, waitForElementToBeRemoved } from "../../test/test-utils";
+import { appRender, fireEvent, waitForElementToBeRemoved } from "../../test/test-utils";
 import { RestaurantsScreen } from "../restaurants";
 import { useSearch } from "../../context/search.context";
 import { useFavourites } from "../../context/favourites.context";

@@ -1,27 +1,33 @@
 import * as React from 'react'
 import MapView from 'react-native-maps'
+import styled from '@emotion/native'
+
 import {Callout} from '../components/map-callout'
 import {SearchBar} from '../components/search'
 import {useSearch} from '../context/search.context'
 import {useLocation} from '../services/geolocation/location.context'
 import {useRestaurants} from '../services/restaurants/restaurant.context'
 import {Favourite} from '../components/favourite'
+import { ActivityIndicator } from 'react-native';
+
+const LoadingIndicator = styled(ActivityIndicator)({
+  zIndex: 10, position: 'absolute', top: '50%', right: '50%'
+})
+
 function MapScreen({navigation}) {
   const {keyword} = useSearch()
   const location = useLocation(keyword)
+
   const locationStrign = `${location.lat},${location.lng}`
 
-  const {data: restaurants} = useRestaurants(locationStrign, {
-    enabled: !!locationStrign,
-  })
-
+  const {data: restaurants, isLoading} = useRestaurants(locationStrign)
   const northeastLat = location ? location.viewport.northeast.lat : null
   const southwestLat = location ? location.viewport.southwest.lat : null
   const latDelta = location ? northeastLat - southwestLat : 0
-
   return (
     <>
       <SearchBar icon="map-outline" />
+      {isLoading ? <LoadingIndicator accessibilityLabel='loading'/> : null }
       <MapView
       testID='map screen'
         style={{height: '100%'}}
@@ -32,10 +38,12 @@ function MapScreen({navigation}) {
           longitudeDelta: 0.02,
         }}
       >
-        {restaurants
+        {
+          restaurants
           ? restaurants.map(restaurant => {
               return (
                 <MapView.Marker
+                  testID='marker'
                   key={restaurant.name}
                   title={restaurant.name}
                   coordinate={{
@@ -44,6 +52,7 @@ function MapScreen({navigation}) {
                   }}
                 >
                   <MapView.Callout
+                    testID='callout'
                     onPress={() =>
                       navigation.navigate('restaurantInfo', {restaurant})
                     }
