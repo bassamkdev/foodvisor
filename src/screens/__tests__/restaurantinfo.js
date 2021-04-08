@@ -1,6 +1,6 @@
 import * as React from 'react'
 import faker from 'faker'
-import { appRender, fireEvent, waitForElementToBeRemoved } from "../../test/test-utils";
+import { appRender, fireEvent } from "../../test/test-utils";
 import { RestaurantInfoScreen } from "../restaurantInfo";
 import { useFavourites } from "../../context/favourites.context";
 import { useCart } from "../../context/cart.context";
@@ -8,7 +8,7 @@ import { useCart } from "../../context/cart.context";
 jest.mock("../../context/cart.context")
 jest.mock("../../context/favourites.context")
 
-test('should render restaurants, toggle favourites, and submit search', async () => {
+test('should render restaurant info, menu, and proper styles on selecting menu items, and add order to cart', async () => {
     useFavourites.mockReturnValue({favourites: []})
     const mockAddToCart = jest.fn()
     useCart.mockReturnValue({
@@ -26,6 +26,8 @@ test('should render restaurants, toggle favourites, and submit search', async ()
     const {getByA11yLabel, getByText, queryByText} = appRender(
             <RestaurantInfoScreen route={{params: {restaurant: mockRestaurant }}}/>
     )
+    expect(getByA11yLabel(/restaurant info/i)).not.toBeNull()
+    
     expect(getByA11yLabel(/menu/i)).not.toBeNull()
     expect(getByText(/breakfast/i)).not.toBeNull()
     expect(getByText(/launch/i)).not.toBeNull()
