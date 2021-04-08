@@ -4,8 +4,8 @@ import {useAuth} from './auth.context'
 
 const CartContext = React.createContext()
 
-function CartProvider(props) {
-  const {user} = useAuth()
+ function CartProvider(props) {
+  const {user} =  useAuth()
   const [state, dispatch] = React.useReducer((s, a) => ({...s, ...a}), {
     cart: [],
     restaurant: null,
